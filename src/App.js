@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import Movie from './components/Movie';
-import Footer from './components/Footer'
+import Footer from './components/Footer';
+
+let REACT_APP_FEATURED_MOVIES = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${process.env.REACT_APP_TMDB_API_KEY}&page=1`;
+let REACT_APP_SEARCH_MOVIE = `https://api.themoviedb.org/3/search/movie?&api_key=${process.env.REACT_APP_TMDB_API_KEY}&query=`;
 
 const App = () =>  {
 
@@ -11,7 +14,7 @@ const App = () =>  {
    
    // Runs only once after page is loaded, no dependecies added
    useEffect(() => {
-      getMovies(process.env.REACT_APP_FEATURED_MOVIES)
+      getMovies(REACT_APP_FEATURED_MOVIES)
    }, []);
 
    const getMovies = (API) => {
@@ -24,7 +27,7 @@ const App = () =>  {
    const handleOnSubmit = (e) => {
       e.preventDefault(); // prevent form reload page after submit
       if(searchText) { // Check if some text is entered
-         getMovies(process.env.REACT_APP_SEARCH_MOVIE + searchText) // call search API with appended SearchText
+         getMovies(REACT_APP_SEARCH_MOVIE + searchText) // call search API with appended SearchText
          setSearchText(''); // reset input field after search is activated
       } 
    }
